@@ -1,12 +1,8 @@
 package com.assignment.controller;
 
 import com.assignment.entity.Contact;
-import com.assignment.model.ErrorResponse;
 import com.assignment.service.ContactService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +15,6 @@ import java.util.Optional;
 
 /**
  * Controller class with CRUD operations on phone directory.
- *
  */
 @RestController
 @Validated
@@ -32,7 +27,8 @@ public class ContactController {
 
     /**
      * HTTP GET call to retrieve all existing contacts from directory.
-     * @return ResponseEntity<List<Contact>>
+     *
+     * @return ResponseEntity<List < Contact>>
      */
     @GetMapping
     public ResponseEntity<List<Contact>> getAllContacts() {
@@ -43,9 +39,10 @@ public class ContactController {
 
     /**
      * HTTP POST call to add a new contact to the directory.
-     * @Valid validates the request body.
+     *
      * @param contact
      * @return ResponseEntity<Contact>
+     * @Valid validates the request body.
      */
     @PostMapping
     public ResponseEntity<Contact> saveContact(@Valid @RequestBody com.assignment.model.Contact contact) {
@@ -56,12 +53,13 @@ public class ContactController {
 
     /**
      * HTTP GET call to search contacts by Id.
+     *
      * @param id
      * @return ResponseEntity
      */
     @GetMapping("/{id}")
     public ResponseEntity getContactById(@PathVariable("id") Integer id) {
-        log.info("Request received to search contacts by Id "+id+" from directory");
+        log.info("Request received to search contacts by Id " + id + " from directory");
         Optional<Contact> contact = contactService.getContactById(id);
         if (contact.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(contact.get());
@@ -72,48 +70,51 @@ public class ContactController {
 
     /**
      * HTTP GET call to search contacts by Name.
+     *
      * @param name
      * @return ResponseEntity
      */
     @GetMapping("/{name}")
     public ResponseEntity getContactByName(@PathVariable("name") String name) {
-        log.info("Request received to search contacts by Name "+name+" from directory");
+        log.info("Request received to search contacts by Name " + name + " from directory");
         Optional<Contact> contact = contactService.getContactByName(name);
         if (contact.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(contact.get());
         } else {
-            log.info("Request processed and No data found for given Name "+name);
+            log.info("Request processed and No data found for given Name " + name);
             return ResponseEntity.status(HttpStatus.OK).body("No data found for given Name");
         }
     }
 
     /**
      * HTTP PUT call to update/modify an existing contact.
-     * @Valid validates the request body.
+     *
      * @param id
      * @param contact
      * @return ResponseEntity
+     * @Valid validates the request body.
      */
     @PutMapping("/{id}")
     public ResponseEntity updateContact(@PathVariable("id") Integer id, @Valid @RequestBody com.assignment.model.Contact contact) {
-        log.info("Request received to modify existing contact by Id "+id+" from directory");
+        log.info("Request received to modify existing contact by Id " + id + " from directory");
         Contact updatedContact = contactService.updateContact(id, contact);
         if (updatedContact != null) {
             return ResponseEntity.status(HttpStatus.OK).body(updatedContact);
         } else {
-            log.info("Request processed and No data found for given Id "+id);
+            log.info("Request processed and No data found for given Id " + id);
             return ResponseEntity.status(HttpStatus.OK).body("No data found for given Id");
         }
     }
 
     /**
      * HTTP DELETE call to delete an existing contact
+     *
      * @param id
      * @return ResponseEntity
      */
     @DeleteMapping("/{id}")
     public ResponseEntity deleteContact(@PathVariable("id") Integer id) {
-        log.info("Request received to delete existing contact by Id "+id+" from directory");
+        log.info("Request received to delete existing contact by Id " + id + " from directory");
         boolean deleted = contactService.deleteContact(id);
         if (deleted) {
             return ResponseEntity.status(HttpStatus.OK).body("Record successfully deleted.");

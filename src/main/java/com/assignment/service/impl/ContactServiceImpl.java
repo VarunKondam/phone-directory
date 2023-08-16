@@ -16,7 +16,7 @@ public class ContactServiceImpl implements ContactService {
     @Autowired
     private ContactRepository contactsRepository;
 
-    public List<Contact> getAllContacts(){
+    public List<Contact> getAllContacts() {
         return (List<Contact>) contactsRepository.findAll();
     }
 
@@ -30,16 +30,17 @@ public class ContactServiceImpl implements ContactService {
 
     public Optional<Contact> getContactById(Integer id) throws NoDataFoundException {
         Optional<Contact> contact = contactsRepository.findById(id);
-        if (contact.isPresent()){
+        if (contact.isPresent()) {
             return contact;
         } else {
             throw new NoDataFoundException("No record found for given Id");
         }
     }
 
-    public Optional<Contact> getContactByName(String name) throws NoDataFoundException{
-        Optional<Contact> contact = contactsRepository.findByName(name);;
-        if (contact.isPresent()){
+    public Optional<Contact> getContactByName(String name) throws NoDataFoundException {
+        Optional<Contact> contact = contactsRepository.findByName(name);
+        ;
+        if (contact.isPresent()) {
             return contact;
         } else {
             throw new NoDataFoundException("No record found for given Name");
@@ -48,10 +49,10 @@ public class ContactServiceImpl implements ContactService {
 
     public Contact updateContact(Integer id, com.assignment.model.Contact updatedContact) throws NoDataFoundException {
         Optional<Contact> existingContact = getContactById(id);
-            existingContact.get().setName(updatedContact.getName());
-            existingContact.get().setPhoneNumber(updatedContact.getPhoneNumber());
-            existingContact.get().setEmail(updatedContact.getEmail());
-            return contactsRepository.save(existingContact.get());
+        existingContact.get().setName(updatedContact.getName());
+        existingContact.get().setPhoneNumber(updatedContact.getPhoneNumber());
+        existingContact.get().setEmail(updatedContact.getEmail());
+        return contactsRepository.save(existingContact.get());
     }
 
     public boolean deleteContact(Integer id) {
