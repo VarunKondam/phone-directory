@@ -10,12 +10,12 @@ Instructions to build and execute:
 6. Once the Tomcat server is up on port 8080, hit below mentioned Api's from Postman.
 
 List of API's:
-v1/contacts - GET - To get all existing contacts from directory
-v1/contacts - POST - To save a new contact to directory
-v1/contacts/{id} - GET - Get contact by Id
-v1/contacts/{name} - GET - Get contact by Name
-v1/contacts/{id} - PUT - Update an existing contact
-v1/contacts/{id} - DELETE - Delete existing contact
+1. v1/contacts - GET - To get all existing contacts from directory
+2. v1/contacts - POST - To save a new contact to directory
+3. v1/contacts/{id} - GET - Get contact by Id
+4. v1/contacts/{name} - GET - Get contact by Name
+5. v1/contacts/{id} - PUT - Update an existing contact
+6. v1/contacts/{id} - DELETE - Delete existing contact
 
 Sample request url for GET: http://localhost:8080/v1/contacts
 
