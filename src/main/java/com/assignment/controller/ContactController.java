@@ -1,11 +1,13 @@
 package com.assignment.controller;
 
 import com.assignment.entity.Contact;
+import com.assignment.model.ErrorResponse;
 import com.assignment.service.ContactService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import java.util.Optional;
 @RestController
 @Validated
 @RequestMapping("/v1/contacts")
+@Slf4j
 public class ContactController {
 
     @Autowired
@@ -25,6 +28,7 @@ public class ContactController {
 
     @GetMapping
     public ResponseEntity<List<Contact>> getAllContacts() {
+        log.info("Request received to getAllContacts()");
         List<Contact> contactList = contactService.getAllContacts();
         return ResponseEntity.status(HttpStatus.OK).body(contactList);
     }
@@ -74,5 +78,9 @@ public class ContactController {
             return ResponseEntity.notFound().build();
         }
     }
+
+//    public ErrorResponse createErrorResponse(String message){
+//
+//    }
 
 }

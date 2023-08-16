@@ -28,25 +28,30 @@ public class ContactServiceImpl implements ContactService {
         return contactsRepository.save(newContact);
     }
 
-    public Optional<Contact> getContactById(Integer id) {
-        return contactsRepository.findById(id);
+    public Optional<Contact> getContactById(Integer id) throws NoDataFoundException {
+        Optional<Contact> contact = contactsRepository.findById(id);
+        if (contact.isPresent()){
+            return contact;
+        } else {
+            throw new NoDataFoundException("No record found for given Id");
+        }
     }
 
-    public Optional<Contact> getContactByName(String name){
-        return contactsRepository.findByName(name);
+    public Optional<Contact> getContactByName(String name) throws NoDataFoundException{
+        Optional<Contact> contact = contactsRepository.findByName(name);;
+        if (contact.isPresent()){
+            return contact;
+        } else {
+            throw new NoDataFoundException("No record found for given Name");
+        }
     }
 
     public Contact updateContact(Integer id, com.assignment.model.Contact updatedContact) throws NoDataFoundException {
         Optional<Contact> existingContact = getContactById(id);
-        if(existingContact.isPresent()){
             existingContact.get().setName(updatedContact.getName());
             existingContact.get().setPhoneNumber(updatedContact.getPhoneNumber());
             existingContact.get().setEmail(updatedContact.getEmail());
             return contactsRepository.save(existingContact.get());
-        } else {
-            throw new NoDataFoundException("No record found for given Id");
-        }
-
     }
 
     public boolean deleteContact(Integer id) {
