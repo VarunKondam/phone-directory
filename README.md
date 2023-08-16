@@ -13,7 +13,7 @@ List of API's:
 1. v1/contacts - GET - To get all existing contacts from directory
 2. v1/contacts - POST - To save a new contact to directory
 3. v1/contacts/{id} - GET - Get contact by Id
-4. v1/contacts/{name} - GET - Get contact by Name
+4. v1/contacts/name/{name} - GET - Get contact by Name
 5. v1/contacts/{id} - PUT - Update an existing contact
 6. v1/contacts/{id} - DELETE - Delete existing contact
 

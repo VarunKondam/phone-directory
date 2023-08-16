@@ -74,7 +74,7 @@ public class ContactController {
      * @param name
      * @return ResponseEntity
      */
-    @GetMapping("/{name}")
+    @GetMapping("/name/{name}")
     public ResponseEntity getContactByName(@PathVariable("name") String name) {
         log.info("Request received to search contacts by Name " + name + " from directory");
         Optional<Contact> contact = contactService.getContactByName(name);
